@@ -1,0 +1,14 @@
+Lab4 Requirements:-
+
+Boxing Game:
+    1) Download a good looking environment from the Asset Store
+    2) Download a 3D model from Mixamo (with animations)
+    3) Create an enemy spawner (spawns enemies in random positions, enemies walk towards the player)
+    4) Instead of killing the enemies with bullets, you kill them with your hands by hitting them (with colliders)
+    5) Add an animation to your enemy prefab (walking animation)
+    6) Trigger an animation when you hit the enemy (dying animation)
+    7) Create a scoreboard using world space UI
+
+Bonus:
+    5) Create a simple main menu to your game (UI buttons with raycast interaction)
+    6) Create a complex animation with blend trees (enemies can strafe and walk, for example)

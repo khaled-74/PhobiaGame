@@ -53,6 +53,9 @@ namespace Quests.PartQuests
 
         public void Choose(int index)
         {
+            if (IsFinished)
+                return;
+
             if (index == 0)
             {
                 IsFinished = true;
@@ -87,10 +90,13 @@ namespace Quests.PartQuests
 
         public override IEnumerator Progress()
         {
+            OnStartQuest?.Invoke();
             highlightPoint.SetActive(true);
             highlightPoint.transform.position = pointShowHighlight.position;
             IsStartedQuest = true;
-            yield break;
+            while (!IsFinished)
+                yield return null;
+            OnEndQuest?.Invoke();
         }
     }
 }

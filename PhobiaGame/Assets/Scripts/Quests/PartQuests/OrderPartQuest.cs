@@ -14,9 +14,18 @@ namespace Quests.PartQuests
     
     public class OrderPartQuest : Quest
     {
+        [SerializeField] private GameObject highlightPoint;
+        [SerializeField] private Transform pointShowHighlight;
+        [SerializeField] private GameObject coffeObject;
+
         public bool IsStartedQuest;
         public Order SelectedOrder;
         public UnityEvent<bool> OnOrderSelect;
+
+        private void Start()
+        {
+            coffeObject.SetActive(false);
+        }
 
         private void Update()
         {
@@ -42,6 +51,29 @@ namespace Quests.PartQuests
             }
         }
 
+        public void Choose(int index)
+        {
+            if (index == 0)
+            {
+                IsFinished = true;
+                OnOrderSelect?.Invoke(SelectedOrder == Order.CaramelMacchiato);
+                CheckDebug(SelectedOrder == Order.CaramelMacchiato);
+            }
+            else if (index == 1)
+            {
+                IsFinished = true;
+                OnOrderSelect?.Invoke(SelectedOrder == Order.FlatWhite);
+                CheckDebug(SelectedOrder == Order.FlatWhite);
+            }
+            else if (index == 2)
+            {
+                IsFinished = true;
+                OnOrderSelect?.Invoke(SelectedOrder == Order.CappuccinoSingleShot);
+                CheckDebug(SelectedOrder == Order.CappuccinoSingleShot);
+            }
+            coffeObject.SetActive(true);
+        }
+
         private void CheckDebug(bool value)
         {
             if (value)
@@ -55,6 +87,8 @@ namespace Quests.PartQuests
 
         public override IEnumerator Progress()
         {
+            highlightPoint.SetActive(true);
+            highlightPoint.transform.position = pointShowHighlight.position;
             IsStartedQuest = true;
             yield break;
         }
